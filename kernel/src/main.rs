@@ -8,6 +8,7 @@ use core::fmt::Write;
 use core::panic::PanicInfo;
 use uart_16550::SerialPort;
 
+use common::font::write_ascii;
 use common::{FrameBuferConfig, PixelColor, PixelWriter};
 
 #[panic_handler]
@@ -29,6 +30,16 @@ pub extern "efiapi" fn kernel_main(config: FrameBuferConfig) -> ! {
                 pixel_writer.write_pixel(x, y, &PixelColor::new(0, 0, 0));
             }
         }
+    }
+
+    unsafe {
+        write_ascii(
+            &mut pixel_writer,
+            0,
+            0,
+            'A',
+            &PixelColor::new(255, 255, 255),
+        );
     }
 
     loop {

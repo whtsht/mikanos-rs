@@ -1,5 +1,7 @@
 #![no_std]
 
+pub mod font;
+
 use uefi::proto::console::gop::GraphicsOutput;
 use uefi::table::boot::ScopedProtocol;
 
