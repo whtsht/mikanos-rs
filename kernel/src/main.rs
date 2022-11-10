@@ -23,10 +23,10 @@ pub extern "efiapi" fn kernel_main(config: FrameBuferConfig) -> ! {
 
     let mut pixel_writer = PixelWriter::new(config);
 
-    for x in 100..pixel_writer.config.horizontal_resolution {
-        for y in 100..pixel_writer.config.vertical_resolution {
+    for x in 0..pixel_writer.config.horizontal_resolution {
+        for y in 0..pixel_writer.config.vertical_resolution {
             unsafe {
-                pixel_writer.write_pixel(x, y, &PixelColor::new(255, 255, 0));
+                pixel_writer.write_pixel(x, y, &PixelColor::new(0, 0, 0));
             }
         }
     }
