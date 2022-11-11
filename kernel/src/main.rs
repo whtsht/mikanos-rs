@@ -32,14 +32,16 @@ pub extern "efiapi" fn kernel_main(config: FrameBuferConfig) -> ! {
         }
     }
 
-    unsafe {
-        write_ascii(
-            &mut pixel_writer,
-            0,
-            0,
-            'A',
-            &PixelColor::new(255, 255, 255),
-        );
+    for i in 0..255 {
+        unsafe {
+            write_ascii(
+                &mut pixel_writer,
+                (i % 32) * 8,
+                (i / 32) * 16,
+                char::from(i as u8),
+                &PixelColor::new(255, 255, 255),
+            );
+        }
     }
 
     loop {

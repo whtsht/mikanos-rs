@@ -11,6 +11,6 @@ cargo build --release
 cd ..
 
 # Run qemu
-./devenv/run_qemu.sh \
+./tools/qemu/run_qemu.sh \
     ./boot/target/x86_64-unknown-uefi/release/kernel_loader.efi \
     ./kernel/kernel.elf
