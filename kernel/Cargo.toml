@@ -12,3 +12,5 @@ path = "src/lib.rs"
 uefi = { version = "0.17.0" }
 uart_16550 = "0.2.0"
 x86_64 = "0.14.10"
+once_cell = { version = "1.16.0", default-features = false}
+spin = "0.9.4"

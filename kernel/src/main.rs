@@ -60,6 +60,8 @@ pub extern "efiapi" fn kernel_main(config: FrameBuferConfig) -> ! {
     console.put_string("I'm MikanOS.\n");
     console.put_string("Nice to meet you\n");
 
+    writeln!(console, "{}", 1).unwrap();
+
     loop {
         unsafe { asm!("hlt") }
     }

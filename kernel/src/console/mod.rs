@@ -1,9 +1,8 @@
 #![allow(dead_code)]
-use crate::{frame::PixelWriter, PixelColor};
+pub mod font;
 
 use self::font::{write_ascii, write_string};
-
-pub mod font;
+use crate::{frame::PixelWriter, PixelColor};
 
 pub struct Console {
     writer: PixelWriter,
@@ -57,7 +56,7 @@ impl Console {
         for c in string.chars() {
             match c {
                 '\n' => self.new_line(),
-                '\t' => todo!(),
+                '\t' => self.put_string("    "),
                 _ => unsafe {
                     write_ascii(
                         &mut self.writer,
@@ -71,5 +70,12 @@ impl Console {
                 },
             }
         }
+    }
+}
+
+impl core::fmt::Write for Console {
+    fn write_str(&mut self, s: &str) -> core::fmt::Result {
+        self.put_string(s);
+        Ok(())
     }
 }

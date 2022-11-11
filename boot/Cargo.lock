@@ -45,6 +45,7 @@ version = "0.1.0"
 dependencies = [
  "uart_16550",
  "uefi",
+ "x86_64",
 ]
 
 [[package]]
