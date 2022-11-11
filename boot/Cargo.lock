@@ -15,18 +15,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
+name = "boot"
+version = "0.1.0"
+dependencies = [
+ "elf_loader",
+ "kernel",
+ "uart_16550",
+ "uefi",
+ "uefi-services",
+ "x86_64",
+]
+
+[[package]]
 name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
-
-[[package]]
-name = "common"
-version = "0.1.0"
-dependencies = [
- "uefi",
- "uefi-services",
-]
 
 [[package]]
 name = "elf_loader"
@@ -36,15 +40,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "kernel_loader"
+name = "kernel"
 version = "0.1.0"
 dependencies = [
- "common",
- "elf_loader",
  "uart_16550",
  "uefi",
- "uefi-services",
- "x86_64",
 ]
 
 [[package]]

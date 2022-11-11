@@ -1,23 +1,4 @@
-use crate::{PixelColor, PixelWriter};
-
-pub const KFONT_A: [u8; 16] = [
-    0b00000000, //
-    0b00011000, //    **
-    0b00011000, //    **
-    0b00011000, //    **
-    0b00011000, //    **
-    0b00100100, //   *  *
-    0b00100100, //   *  *
-    0b00100100, //   *  *
-    0b00100100, //   *  *
-    0b01111110, //  ******
-    0b01000010, //  *    *
-    0b01000010, //  *    *
-    0b01000010, //  *    *
-    0b11100111, // ***  ***
-    0b00000000, //
-    0b00000000, //
-];
+use crate::frame::{PixelColor, PixelWriter};
 
 const FONT: &[u8] = include_bytes!("./hankaku.bin");
 
@@ -40,5 +21,20 @@ pub unsafe fn write_ascii(
                 writer.write_pixel(x + dx, y + dy, color);
             }
         }
+    }
+}
+
+/// # Safety
+/// 0 < x < self.horizontal_resolution - 8 * s.len()
+/// 0 < y < self.vertical_resolution -16
+pub unsafe fn write_string(
+    writer: &mut PixelWriter,
+    x: usize,
+    y: usize,
+    s: &[char],
+    color: &PixelColor,
+) {
+    for (offset, &c) in s.iter().enumerate() {
+        write_ascii(writer, x + offset * 8, y, c, color);
     }
 }

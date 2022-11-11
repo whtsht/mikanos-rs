@@ -9,14 +9,21 @@ mod fs;
 
 use core::fmt::Write;
 
-use common::FrameBuferConfig;
 use elf_loader::parser;
 use elf_loader::types::program::SegmentType;
+use kernel::frame::FrameBuferConfig;
 use uart_16550::SerialPort;
 use uefi::prelude::*;
 
 use uefi::proto::console::gop::GraphicsOutput;
 use uefi::table::boot::{AllocateType, MemoryType};
+
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
 
 fn load_kernel(image: Handle, st: &mut SystemTable<Boot>) -> fs::Result<usize> {
     let mut root_dir = fs::open_root_dir(image, st.boot_services())?;

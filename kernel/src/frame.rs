@@ -1,7 +1,3 @@
-#![no_std]
-
-pub mod font;
-
 use uefi::proto::console::gop::GraphicsOutput;
 use uefi::table::boot::ScopedProtocol;
 
@@ -87,6 +83,16 @@ impl PixelWriter {
     /// 0 < y < self.vertical_resolution
     pub unsafe fn write_pixel(&mut self, x: usize, y: usize, color: &PixelColor) {
         (self.writer)(&self.config, x, y, color);
+    }
+
+    pub fn clear_screen(&mut self, color: &PixelColor) {
+        for x in 0..self.config.horizontal_resolution {
+            for y in 0..self.config.vertical_resolution {
+                unsafe {
+                    self.write_pixel(x, y, color);
+                }
+            }
+        }
     }
 
     pub fn new(config: FrameBuferConfig) -> Self {

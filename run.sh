@@ -12,5 +12,5 @@ cd ..
 
 # Run qemu
 ./tools/qemu/run_qemu.sh \
-    ./boot/target/x86_64-unknown-uefi/release/kernel_loader.efi \
+    ./boot/target/x86_64-unknown-uefi/release/boot.efi \
     ./kernel/kernel.elf
