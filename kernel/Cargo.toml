@@ -11,3 +11,4 @@ path = "src/lib.rs"
 [dependencies]
 uefi = { version = "0.17.0" }
 uart_16550 = "0.2.0"
+x86_64 = "0.14.10"
